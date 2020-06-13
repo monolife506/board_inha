@@ -1,0 +1,64 @@
+/* Nanum Gothic - Regular, Bold*/
+@import url("https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&display=swap&subset=korean");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar {
+  display: none;
+  flex-direction: row;
+}
+
+#welcome {
+  margin: 10px;
+}
+
+.lead-welcome {
+  font-weight: lighter;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.welcome-btn-wrapper {
+  margin: 10px 0px;
+}
+
+.card {
+  width: 100%;
+  border-radius: 0;
+  border-collapse: collapse;
+}
+
+@media (min-width: 992px) {
+  body {
+    flex-direction: row;
+  }
+
+  #content {
+    margin: 10px;
+  }
+
+  #navbar {
+    display: none;
+  }
+
+  #sidebar {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+  }
+
+  .card-wrapper {
+    align-items: center;
+    margin: 10px;
+  }
+}
