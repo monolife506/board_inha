@@ -1,16 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: aym50
-  Date: 2020-06-13
-  Time: 오후 11:40
-  To change this template use File | Settings | File Templates.
---%>
+<%-- index.jsp: list.jsp로 포워딩 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<% response.sendRedirect("/list"); %>

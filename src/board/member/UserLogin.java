@@ -1,6 +1,4 @@
-package board.controller;
-
-import board.member.MemberDB;
+package board.member;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -48,16 +46,17 @@ public class UserLogin extends HttpServlet
         MemberDB memberDB = new MemberDB();
         HttpSession httpSession = req.getSession(true);
 
-        if (httpSession.getAttribute("user.id") != null) {
-            httpSession.setAttribute("wrongAccess", true);
-        } else if (!memberDB.checkId(id)) {
-            validLogin = false;
-        } else if (!memberDB.checkPwd(id, pwd)) {
-            validLogin = false;
-        } else {
-            httpSession.setAttribute("user.id", id);
+        if (httpSession.getAttribute("user.id") == null) {
+            if (!memberDB.checkId(id)) {
+                validLogin = false;
+            } else if (!memberDB.checkPwd(id, pwd)) {
+                validLogin = false;
+            } else {
+                httpSession.setAttribute("user.id", id);
+            }
         }
 
+        memberDB.close();
         httpSession.setAttribute("validLogin", validLogin);
         resp.sendRedirect("/list");
     }

@@ -1,4 +1,4 @@
-package board.post;
+package board.like;
 
 public class Like
 {

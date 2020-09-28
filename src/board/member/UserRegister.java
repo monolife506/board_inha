@@ -1,7 +1,4 @@
-package board.controller;
-
-import board.member.Member;
-import board.member.MemberDB;
+package board.member;
 
 import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
@@ -51,7 +48,6 @@ public class UserRegister extends HttpServlet
         String target = "/register";
 
         if (id == null || email == null || pwd == null) {
-            httpSession.setAttribute("wrongAccess", true);
             target = "/list";
         } else {
             MemberDB memberDB = new MemberDB();
@@ -71,6 +67,7 @@ public class UserRegister extends HttpServlet
 
                 target = "/list";
             }
+            memberDB.close();
         }
 
         resp.sendRedirect(target);

@@ -1,6 +1,10 @@
-<%@ page import="board.member.UserRegister" %>
+<%@ page import="board.member.UserModify" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% UserRegister.RegisterError errorType = (UserRegister.RegisterError) session.getAttribute("registerError");%>
+<%
+    UserModify.RegisterError errorType = (UserModify.RegisterError) session.getAttribute("registerError");
+    String userId = (String) session.getAttribute("user.id");
+    String userEmail = (String) request.getAttribute("user.email");
+%>
 
 <html>
 <head>
@@ -11,6 +15,10 @@
     <style>
         .card {
             margin: 10px;
+        }
+
+        .form-button {
+            display: inline;
         }
     </style>
 
@@ -25,26 +33,26 @@
             <div class="card-body">
                 <% if (errorType != null) { %>
                 <div id="register-error" class="alert alert-danger" role="alert">
-                    <% if (errorType == UserRegister.RegisterError.ID_ERROR) { %>
+                    <% if (errorType == UserModify.RegisterError.ID_ERROR) { %>
                     이미 존재하는 ID입니다.
-                    <% } else if (errorType == UserRegister.RegisterError.EMAIL_ERROR) { %>
+                    <% } else if (errorType == UserModify.RegisterError.EMAIL_ERROR) { %>
                     이미 존재하는 이메일입니다.
                     <% } %>
                 </div>
                 <% errorType = null; %>
                 <% } %>
 
-                <form id="register-form" method="post" action="/register.do" class="needs-validation" novalidate>
+                <form id="register-form" method="post" action="/usermodify.do" class="needs-validation" novalidate>
                     <div class="form-group">
                         <label for="id">ID</label>
                         <input
                                 type="text"
                                 class="form-control"
                                 id="id"
-                                name="id"
                                 maxlength="20"
                                 pattern="^[A-Za-z0-9-_]{4,20}$"
-                                required
+                                value="<%=userId%>"
+                                disabled
                         />
                         <small id="id-help" class="form-text text-muted">
                             알파벳이나 숫자를 포함해 4자 이상 20자 이내로 입력해 주세요.
@@ -58,6 +66,7 @@
                                 id="email"
                                 name="email"
                                 maxlength="50"
+                                value="<%=userEmail%>"
                                 required
                         />
                         <small id="email-help" class="form-text text-muted">
@@ -79,9 +88,12 @@
                             알파벳이나 숫자를 포함해 6자 이상 20자 이내로 입력해 주세요.
                         </small>
                     </div>
-                    <div class="form-group d-flex flex-row-reverse">
-                        <input id="submit-btn" type="submit" class="btn btn-outline-primary" value="회원가입"/>
+                    <div class="form-group form-button">
+                        <input id="submit-btn" type="submit" class="btn btn-outline-primary" value="수정"/>
                     </div>
+                </form>
+                <form class="form-button" method="post" action="/userdelete.do">
+                    <input id="delete" type="submit" class="btn btn-outline-danger" value="계정 삭제">
                 </form>
             </div>
         </div>
@@ -122,6 +134,15 @@
             }, false);
         });
     }, false);
+
+    // 삭제
+    let deleteButton = document.querySelector("#delete");
+    deleteButton.addEventListener("click", (event) => {
+        if (!confirm("계정을 정말로 지우시겠습니까?")) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
 </script>
 </body>
 </html>

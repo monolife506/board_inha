@@ -4,17 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- Welcome File -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
     <!-- JDBC Connection Pool Setting -->
     <resource-ref>
-        <description>inha_board Database Connection Pool</description>
+        <description>board_inha Database Connection Pool</description>
         <res-ref-name>jdbc/boardDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
-
-    <!-- Servlet Mapping -->
-    <servlet-mapping>
-        <servlet-name>IndexController</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
 </web-app>

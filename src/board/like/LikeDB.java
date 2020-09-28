@@ -1,4 +1,4 @@
-package board.post;
+package board.like;
 
 import board.util.ConPool;
 

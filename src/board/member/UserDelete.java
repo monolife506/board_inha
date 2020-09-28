@@ -8,14 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Objects;
 
-@WebServlet("/usermodify.do")
-public class UserModify extends HttpServlet
+@WebServlet("/userdelete.do")
+public class UserDelete extends HttpServlet
 {
-    public enum RegisterError
-    {ID_ERROR, EMAIL_ERROR}
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
@@ -44,31 +40,17 @@ public class UserModify extends HttpServlet
 
         HttpSession httpSession = req.getSession(true);
         String userId = (String) httpSession.getAttribute("user.id");
-        String email = req.getParameter("email");
-        String pwd = req.getParameter("pwd");
-        String target = "/usermodify";
-
-        if (userId == null || email == null || pwd == null) {
-            target = "/list";
-        } else {
+        try {
             MemberDB memberDB = new MemberDB();
-            if (memberDB.checkEmail(email) && !Objects.equals(memberDB.getEmail(userId), email)) {
-                httpSession.setAttribute("registerError", UserRegister.RegisterError.EMAIL_ERROR);
-            } else {
-                Member member = new Member();
-                member.setId(userId);
-                member.setEmail(email);
-                member.setPwd(pwd);
-                memberDB.updateMember(member);
+            memberDB.deleteMember(userId);
+            httpSession.setAttribute("user.id", null);
 
-                httpSession.setAttribute("user.id", userId);
-                httpSession.setAttribute("registerError", null);
-
-                target = "/list";
-            }
             memberDB.close();
         }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        resp.sendRedirect(target);
+        resp.sendRedirect("/list");
     }
 }

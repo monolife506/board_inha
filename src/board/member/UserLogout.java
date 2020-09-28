@@ -1,4 +1,4 @@
-package board.controller;
+package board.member;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

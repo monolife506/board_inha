@@ -1,4 +1,4 @@
-package board.db;
+package board.util;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

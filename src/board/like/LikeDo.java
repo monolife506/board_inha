@@ -1,4 +1,6 @@
-package board.post;
+package board.like;
+
+import board.post.PostDB;
 
 import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;

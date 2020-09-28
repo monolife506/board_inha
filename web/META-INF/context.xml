@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource description="DB Connection"
+    <Resource description="Board DB Connection Pool"
               auth="Container"
               driverClassName="org.mariadb.jdbc.Driver"
               name="jdbc/boardDB"
               type="javax.sql.DataSource"
-              url="jdbc:mariadb://localhost:3306/mydb?useSSL=false"
+              url="jdbc:mariadb://localhost:3306/snsboard?useSSL=false"
               username="admin"
               password="1234"
               maxIdle="5"
               maxTotal="5"
-              maxWaitMillis="5000" />
+              maxWaitMillis="5000"/>
 </Context>
